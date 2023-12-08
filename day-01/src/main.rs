@@ -48,7 +48,7 @@ fn part2(input: &str) -> u32 {
         }
 
         assert!(
-            digits.len() > 0,
+            !digits.is_empty(),
             "At least one digit should be in the line: {:?}",
             line
         );

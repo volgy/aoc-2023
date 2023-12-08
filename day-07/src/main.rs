@@ -23,7 +23,7 @@ fn evaluate<T: HandTrait>(input: &str) -> u32 {
     input
         .lines()
         .map(|s| {
-            let (hand, bid) = s.split_once(" ").unwrap();
+            let (hand, bid) = s.split_once(' ').unwrap();
             (T::new(hand), bid.parse::<u32>().unwrap())
         })
         .sorted()

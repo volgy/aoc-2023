@@ -30,7 +30,7 @@ impl Schematic {
 
         // Instead of "lines.()" we leave the "\n" in the result
         // for uniform handling of end of numbers.
-        for (row, line) in input.split_inclusive("\n").enumerate() {
+        for (row, line) in input.split_inclusive('\n').enumerate() {
             for (col, ch) in line.chars().enumerate() {
                 if ch.is_ascii_digit() {
                     num_str.push(ch);

@@ -69,7 +69,7 @@ fn min_balls_per_game(input: &str) -> HashMap<u32, Balls> {
         for draw_str in game.split("; ") {
             let mut draw = Balls::default();
             for ball_str in draw_str.split(", ") {
-                let (count, color) = ball_str.split_once(" ").unwrap();
+                let (count, color) = ball_str.split_once(' ').unwrap();
                 let count: u32 = count.parse().unwrap();
                 match color {
                     "red" => draw.red = count,

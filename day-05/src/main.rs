@@ -112,7 +112,7 @@ impl Almanac {
     }
 
     fn map_interval(interval: &Interval, map: &IntervalMap) -> Vec<Interval> {
-        let mut interval = interval.clone();
+        let mut interval = *interval;
         let mut mapped = Vec::new();
         for (src, offset) in map {
             if let Some(overlap) = interval.overlap(src) {

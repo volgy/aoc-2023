@@ -77,8 +77,6 @@ impl HandTrait for Hand {
                 }
             }
         }
-
-        // Upgrade with Jokers
     }
 }
 
@@ -90,15 +88,14 @@ impl PartialOrd for Hand {
 
 impl Ord for Hand {
     fn cmp(&self, other: &Self) -> Ordering {
-        if self.kind() < other.kind() {
-            Ordering::Less
-        } else if self.kind() > other.kind() {
-            Ordering::Greater
-        } else {
-            self.0
+        match self.kind().cmp(&other.kind()) {
+            Ordering::Less => Ordering::Less,
+            Ordering::Greater => Ordering::Greater,
+            Ordering::Equal => self
+                .0
                 .chars()
                 .map(|l| LABEL_VALUE[&l])
-                .cmp(other.0.chars().map(|l| LABEL_VALUE[&l]))
+                .cmp(other.0.chars().map(|l| LABEL_VALUE[&l])),
         }
     }
 }

@@ -1,7 +1,7 @@
 use std::collections::{HashMap, HashSet};
 
 fn count_wins(card: &str) -> u64 {
-    let (winners, numbers) = card.split_once(":").unwrap().1.split_once("|").unwrap();
+    let (winners, numbers) = card.split_once(':').unwrap().1.split_once('|').unwrap();
     let winners: HashSet<_> = winners.split_whitespace().collect();
     numbers
         .split_whitespace()
@@ -27,16 +27,16 @@ fn part1_with_iterators(input: &str) -> u32 {
         .lines()
         .map(|l| {
             let matches = l
-                .split_once(":")
+                .split_once(':')
                 .unwrap()
                 .1
-                .split("|")
+                .split('|')
                 .map(|s| s.split_whitespace().collect::<HashSet<_>>())
-                .reduce(|a, b| a.intersection(&b).map(|e| *e).collect())
+                .reduce(|a, b| a.intersection(&b).copied().collect())
                 .unwrap()
                 .len() as u32;
             if matches > 0 {
-                1 << matches - 1
+                1 << (matches - 1)
             } else {
                 0
             }
@@ -51,7 +51,7 @@ fn part2(input: &str) -> u32 {
         let n_current = deck.entry(i_current).or_insert(0);
         *n_current += 1;
         let multiplier = *n_current;
-        let win_range = count_wins(&line) as usize;
+        let win_range = count_wins(line) as usize;
 
         for idx in (i_current + 1)..=(i_current + win_range) {
             *deck.entry(idx).or_insert(0) += multiplier;
